@@ -16,6 +16,10 @@ load_dotenv()
 
 bot_token = str(os.getenv("BOT_TOKEN"))
 provider_token = str(os.getenv("PROVIDER_TOKEN"))
+amount = int(os.getenv("AMOUNT"))
+suggested = int(os.getenv("SUGGESTED"))
+url = str(os.getenv("URL"))
+
 
 bot = Bot(
     token=bot_token,
@@ -34,10 +38,10 @@ async def send_message(message: types.Message):
 
     PRICE = types.LabeledPrice(
         label='Оплата',
-        amount=16500
+        amount=amount
     )
 
-    TIME_MACHINE_IMAGE_URL = 'https://telegra.ph/file/3aaaaa7bc38272d645e69.jpg'
+    TIME_MACHINE_IMAGE_URL = ''
 
 
     await bot.send_invoice(
@@ -48,7 +52,7 @@ async def send_message(message: types.Message):
         currency='uah',
         photo_height=512,  # !=0/None, иначе изображение не покажется
         photo_width=512,
-        photo_url=TIME_MACHINE_IMAGE_URL,
+        photo_url=url,
         is_flexible=False,  # True если конечная цена зависит от способа доставки
         prices=[PRICE],
         start_parameter='hot-to-get',
@@ -56,8 +60,8 @@ async def send_message(message: types.Message):
         need_name=True,
         need_email=True,
         need_phone_number=True,
-        max_tip_amount=16500,
-        suggested_tip_amounts=[11000]
+        max_tip_amount=amount,
+        suggested_tip_amounts=[suggested]
     )
 
 
