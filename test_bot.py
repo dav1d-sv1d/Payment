@@ -21,6 +21,7 @@ provider_token = str(os.getenv("PROVIDER_TOKEN"))
 amount = int(os.getenv("AMOUNT"))
 suggested = int(os.getenv("SUGGESTED"))
 url = str(os.getenv("URL"))
+chat_id = int(os.getenv("CHAT_ID"))
 
 
 bot = Bot(
@@ -68,6 +69,7 @@ async def send_message(message: types.Message):
 
 @dp.pre_checkout_query_handler()
 async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery):
+
 
     await bot.answer_pre_checkout_query(
         pre_checkout_query.id,
@@ -120,7 +122,14 @@ async def process_successful_payment(message: types.Message):
         )
     )
 
-
+    try:
+        await bot.send_message(
+            chat_id=message.chat.id,
+            text="Ваша оплата прошла успешно!\nМенеджер <a href='http://RazomGO.com'>RazomGO</a> очень скоро с Вами свяжется!\nХорошего дня ☀️",
+            disable_web_page_preview=True
+        )
+    except Exception:
+        pass
 
 
 if __name__ == '__main__':
