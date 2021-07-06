@@ -105,7 +105,8 @@ async def process_successful_payment(message: types.Message):
     for item in data.keys():
         info.append(f"<b>{replace[item]}</b>: {data[item]}")
 
-    info.append("<b>Ник в телеграмме</b>: " f"<a href='tg://user?id={message.from_user.id}'>{message.from_user.full_name}</a>")
+    info.append(
+        f"<b>Ник в телеграмме</b>: <a href='tg://user?id={message.from_user.id}'>{message.from_user.full_name}</a>")
 
 
     await bot.send_message(
