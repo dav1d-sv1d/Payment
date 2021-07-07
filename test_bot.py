@@ -112,7 +112,7 @@ async def process_successful_payment(message: types.Message):
 
 
     await bot.send_message(
-        chat_id=-1001598180481,
+        chat_id=chat_id,
         text="<b>Название</b>: {}\n\n{}\n\n{}\n\n<b>Сумма оплаты</b>: {},{} грн.".format(
             pmnt["invoice_payload"],
             "\n".join(data_and_time),
